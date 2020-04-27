@@ -11,13 +11,14 @@ class ClientThread extends Thread {
         try {
             // Get the request from the input stream: client → server
 
+            //crearea capetelor pentru socket
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream());
             while(true)
             {
             String request = in.readLine();
-
+            //primirea request-urilor de la client si tratarea lor
             String raspuns;
             System.out.println("Received from client:"+request);
                 if(request.equals("stop"))
@@ -44,7 +45,7 @@ class ClientThread extends Thread {
             System.err.println("Communication error... " + e);
         } finally {
             try {
-                socket.close(); // or use try-with-resources
+                socket.close();
             } catch (IOException e) { System.err.println (e); }
         }
     }
